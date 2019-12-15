@@ -8,32 +8,6 @@ import requests
 import os
 import smtplib
 from datetime import date
-def createaccount(nickname,password):
-    path=r'C:\Users\WIKUS\Desktop\CRYPTO_VALUES\USERSDATE.txt'
-    with open(path, 'a') as usersdate:
-        usersdate.write('\n')
-        usersdate.write(nickname)
-        usersdate.write('-')
-        usersdate.write(password)   #mozna to jeszcze dorzucic szyfrowanie danych ktore pozniej przy sprawadzaniu bedzie deszyfrowane i szyfrowane za kazdym razem:)
-        usersdate.close()
-        print("account created!")
-
-def check_user(nickname,password):
-    path = r'C:\Users\WIKUS\Desktop\CRYPTO_VALUES\USERSDATE.txt'
-    status=True
-    with open(path, 'r') as usersdate:
-        for line in usersdate:
-            data=line.split('-')
-            if data[0]==nickname and data[1]==password:
-                print('Welcome in our system!')
-                status=True
-                return status
-        print("Oops!,We can't finf you:<")
-        print('Check your login or password and try again , or create new account')
-        status=False
-    return status
-
-
 
 def send_email(username,password,crypto,high_value,low_value,*args):
 
@@ -111,8 +85,7 @@ def notice_changes(dirpath,crypto,high_value,low_value):
         file.close()
 
 
-#print("highest daily value of bitcoin:",actual_bitcoin_HIGHEST_value)
-#print("lowest daily value of bitcoin:",actual_bitcoin_LOWEST_value)
+
 def daily_crypto_values():
     msg = "Please wait - the file {} will be downloaded"
     dire = r'C:\Users\WIKUS\Desktop\CRYPTO_VALUES'
@@ -121,8 +94,7 @@ def daily_crypto_values():
     for c in crypto:
         save_url_file(dire,'VALUE_'+c+'.txt', msg, c)
         notice_changes(dire, c+'_actual_value'+'.txt', find_high_daily_value(dire+'\\'+'VALUE_'+c+'.txt',"Daily High"), find_low_daily_value(dire+'\\'+'VALUE_'+c+'.txt','Daily Low'))
-    #actual_bitcoin_HIGHEST_value = find_high_daily_value(dire + "\\" + file, "Daily High")
-    #actual_bitcoin_LOWEST_value = find_low_daily_value(dire + "\\" + file, "Daily Low")
+    
 
 def writtin():
     msg = "Please wait - the file {} will be downloaded"
